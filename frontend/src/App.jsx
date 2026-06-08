@@ -1,21 +1,23 @@
+import { Routes, Route, Link } from "react-router-dom"
+import Home from "./pages/Home.jsx"
+import Login from "./pages/Login.jsx"
+
 function App() {
   return (
     <div>
       <nav>
         <h2>MemoryOS</h2>
+
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+        </div>
       </nav>
 
-      <main>
-        <h1>AI-Powered Knowledge Management</h1>
-
-        <p>
-          MemoryOS enables organizations and individuals to capture,
-          organize, and retrieve information through intelligent search
-          and conversational AI.
-        </p>
-
-        <button>Get Started</button>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
   )
 }
