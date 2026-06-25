@@ -1,7 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
+from app.database.database import get_db
 from app.schemas.memory import Memory
-from app.services.memory_service import memories
+from app.services.memory_service import create_memory, get_memories
 
 router = APIRouter()
 
@@ -12,15 +14,15 @@ def home():
 
 
 @router.post("/memories")
-def create_memory(memory: Memory):
-    memories.append(memory)
-
-    return {
-        "message": "Memory saved successfully",
-        "memory": memory
-    }
+def add_memory(
+    memory: Memory,
+    db: Session = Depends(get_db)
+):
+    return create_memory(db, memory)
 
 
 @router.get("/memories")
-def get_memories():
-    return memories
+def read_memories(
+    db: Session = Depends(get_db)
+):
+    return get_memories(db)
