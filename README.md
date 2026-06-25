@@ -1,6 +1,6 @@
 # MemoryOS
 
-AI-powered knowledge management platform for capturing, organizing, and retrieving information.
+MemoryOS is an AI-powered knowledge management platform built to transform scattered information into organized, searchable knowledge. It provides a centralized workspace where teams can securely capture documentation, standard operating procedures, meeting notes, technical knowledge, and organizational expertise, making critical information easy to discover and reuse.
 
 ## Tech Stack
 
