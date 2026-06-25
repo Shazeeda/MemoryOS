@@ -22,11 +22,20 @@ function Memories() {
   }, []);
 
   return (
-    <div>
-      <h1>Memories</h1>
-      <MemoryForm onSaveMemory={handleSaveMemory} />
-      <MemoryList memories={memories} />
-    </div>
+    <main className="page">
+      <section className="memories-page">
+        <div className="memories-header">
+          <h1>Memory Vault</h1>
+          <p>
+            Capture important knowledge, organize institutional memory, and
+            retrieve what matters later.
+          </p>
+        </div>
+
+        <MemoryForm onSaveMemory={handleSaveMemory} />
+        <MemoryList memories={memories} />
+      </section>
+    </main>
   );
 }
 

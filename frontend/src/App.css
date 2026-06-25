@@ -1,65 +1,329 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #070b14;
+  --panel: #0f172a;
+  --panel-soft: #111827;
+  --border: rgba(148, 163, 184, 0.18);
+  --border-strong: rgba(148, 163, 184, 0.28);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --muted-light: #cbd5e1;
+  --accent: #818cf8;
+  --accent-soft: rgba(129, 140, 248, 0.16);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0f1117;
-  color: white;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(99, 102, 241, 0.16), transparent 36%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
 }
 
 nav {
+  width: 100%;
+  min-height: 88px;
+  padding: 0 72px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 24px 48px;
-  border-bottom: 1px solid #242733;
-}
-nav h2 {
-  margin: 0;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(7, 11, 20, 0.86);
+  backdrop-filter: blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-main {
-  max-width: 1200px;
+nav h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+nav div {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+nav a {
+  color: var(--muted-light);
+  font-size: 16px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+.page {
+  min-height: calc(100vh - 88px);
+  padding: 72px 24px 96px;
+}
+
+.hero {
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 120px 48px;
+  text-align: center;
+  padding: 96px 0;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(52px, 8vw, 98px);
+  line-height: 0.95;
+  letter-spacing: -0.08em;
+}
+
+.hero p {
+  max-width: 880px;
+  margin: 28px auto 0;
+  color: var(--muted);
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.5;
+}
+
+.memories-page {
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
+
+.memories-header {
+  max-width: 780px;
+  margin: 0 auto 44px;
   text-align: center;
 }
 
-h1 {
-  font-size: 64px;
-  margin-bottom: 24px;
+.memories-header h1 {
+  margin: 0;
+  font-size: clamp(52px, 8vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -0.08em;
 }
 
-p {
-  font-size: 22px;
+.memories-header p {
+  max-width: 660px;
+  margin: 22px auto 0;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.memory-form {
+  width: min(100%, 720px);
+  margin: 0 auto 72px;
+  padding: 30px;
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.72)),
+    var(--panel);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.memory-form input,
+.memory-form textarea {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 20px;
+  background: rgba(2, 6, 23, 0.72);
+  color: var(--text);
+  font-size: 17px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.memory-form input {
+  height: 58px;
+  padding: 0 20px;
+}
+
+.memory-form textarea {
+  min-height: 170px;
+  padding: 20px;
+  resize: vertical;
   line-height: 1.6;
-  color: #b5bac7;
 }
 
-button {
-  margin-top: 32px;
-  padding: 14px 28px;
+.memory-form input::placeholder,
+.memory-form textarea::placeholder {
+  color: #64748b;
+}
+
+.memory-form input:focus,
+.memory-form textarea:focus {
+  border-color: var(--accent);
+  background: rgba(2, 6, 23, 0.88);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.memory-form button {
+  height: 58px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  background: white;
-  color: black;
-  font-weight: 600;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.memory-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
+}
+
+.memory-list {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.memory-list h2 {
+  margin: 0 0 6px;
+  text-align: left;
+  font-size: 34px;
+  font-weight: 850;
+  letter-spacing: -0.05em;
+}
+
+.memory-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(17, 24, 39, 0.86), rgba(15, 23, 42, 0.74)),
+    var(--panel-soft);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+.memory-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.memory-card-header h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.memory-card-header span {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 14px;
   font-weight: 600;
+  padding-top: 4px;
+}
+
+.memory-card p {
+  margin: 0;
+  color: var(--muted-light);
+  font-size: 17px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.empty-state {
+  padding: 44px;
+  text-align: center;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  border-radius: 26px;
+  color: var(--muted);
+  background: rgba(15, 23, 42, 0.35);
+}
+
+@media (max-width: 720px) {
+  nav {
+    min-height: 76px;
+    padding: 0 22px;
+  }
+
+  nav h1 {
+    font-size: 24px;
+  }
+
+  nav div {
+    gap: 18px;
+  }
+
+  nav a {
+    font-size: 15px;
+  }
+
+  .page {
+    min-height: calc(100vh - 76px);
+    padding: 48px 18px 72px;
+  }
+
+  .hero {
+    padding: 64px 0;
+  }
+
+  .memories-header {
+    margin-bottom: 32px;
+  }
+
+  .memories-header p {
+    font-size: 18px;
+  }
+
+  .memory-form {
+    padding: 22px;
+    border-radius: 24px;
+    margin-bottom: 52px;
+  }
+
+  .memory-list h2 {
+    font-size: 28px;
+  }
+
+  .memory-card {
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .memory-card-header {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
