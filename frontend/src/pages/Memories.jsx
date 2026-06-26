@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { createMemory, deleteMemory, fetchMemories } from "../api/memoryApi";
+import {
+  createMemory,
+  deleteMemory,
+  fetchMemories,
+  updateMemory,
+} from "../api/memoryApi";
 import MemoryForm from "../components/MemoryForm";
 import MemoryList from "../components/MemoryList";
 import SearchBar from "../components/SearchBar";
@@ -8,6 +13,7 @@ import SearchBar from "../components/SearchBar";
 function Memories() {
   const [memories, setMemories] = useState([]);
   const [search, setSearch] = useState("");
+  const [editingMemory, setEditingMemory] = useState(null);
 
   async function loadMemories() {
     const data = await fetchMemories();
@@ -15,13 +21,27 @@ function Memories() {
   }
 
   async function handleSaveMemory(memoryData) {
-    await createMemory(memoryData);
+    if (editingMemory) {
+      await updateMemory(editingMemory.id, memoryData);
+      setEditingMemory(null);
+    } else {
+      await createMemory(memoryData);
+    }
+
     await loadMemories();
   }
 
   async function handleDeleteMemory(memoryId) {
     await deleteMemory(memoryId);
     await loadMemories();
+  }
+
+  function handleEditMemory(memory) {
+    setEditingMemory(memory);
+  }
+
+  function handleCancelEdit() {
+    setEditingMemory(null);
   }
 
   useEffect(() => {
@@ -53,11 +73,16 @@ function Memories() {
 
         <SearchBar search={search} setSearch={setSearch} />
 
-        <MemoryForm onSaveMemory={handleSaveMemory} />
+        <MemoryForm
+          onSaveMemory={handleSaveMemory}
+          editingMemory={editingMemory}
+          onCancelEdit={handleCancelEdit}
+        />
 
         <MemoryList
           memories={filteredMemories}
           onDeleteMemory={handleDeleteMemory}
+          onEditMemory={handleEditMemory}
         />
       </section>
     </main>

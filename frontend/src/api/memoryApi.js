@@ -26,6 +26,22 @@ export async function createMemory(memoryData) {
   return response.json();
 }
 
+export async function updateMemory(memoryId, memoryData) {
+  const response = await fetch(`${API_BASE_URL}/memories/${memoryId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(memoryData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update memory");
+  }
+
+  return response.json();
+}
+
 export async function deleteMemory(memoryId) {
   const response = await fetch(`${API_BASE_URL}/memories/${memoryId}`, {
     method: "DELETE",

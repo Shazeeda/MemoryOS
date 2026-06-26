@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function MemoryForm({ onSaveMemory }) {
+function MemoryForm({ onSaveMemory, editingMemory, onCancelEdit }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (editingMemory) {
+      setTitle(editingMemory.title);
+      setContent(editingMemory.content);
+    }
+  }, [editingMemory]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,6 +21,12 @@ function MemoryForm({ onSaveMemory }) {
 
     setTitle("");
     setContent("");
+  }
+
+  function handleCancel() {
+    setTitle("");
+    setContent("");
+    onCancelEdit();
   }
 
   return (
@@ -31,7 +44,15 @@ function MemoryForm({ onSaveMemory }) {
         onChange={(event) => setContent(event.target.value)}
       />
 
-      <button type="submit">Save Memory</button>
+      <button type="submit">
+        {editingMemory ? "Update Memory" : "Save Memory"}
+      </button>
+
+      {editingMemory && (
+        <button type="button" onClick={handleCancel}>
+          Cancel Edit
+        </button>
+      )}
     </form>
   );
 }

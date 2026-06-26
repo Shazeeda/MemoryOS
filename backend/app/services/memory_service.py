@@ -21,6 +21,25 @@ def get_memories(db: Session):
     return db.query(MemoryModel).all()
 
 
+def update_memory(db: Session, memory_id: int, memory: Memory):
+    existing_memory = (
+        db.query(MemoryModel)
+        .filter(MemoryModel.id == memory_id)
+        .first()
+    )
+
+    if not existing_memory:
+        return None
+
+    existing_memory.title = memory.title
+    existing_memory.content = memory.content
+
+    db.commit()
+    db.refresh(existing_memory)
+
+    return existing_memory
+
+
 def delete_memory(db: Session, memory_id: int):
     memory = (
         db.query(MemoryModel)

@@ -225,6 +225,18 @@ nav a:hover {
   box-shadow: 0 12px 30px rgba(99, 102, 241, 0.45);
 }
 
+.memory-form button[type="button"] {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--muted-light);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.memory-form button[type="button"]:hover {
+  box-shadow: none;
+  background: rgba(148, 163, 184, 0.18);
+  color: var(--text);
+}
+
 .memory-list {
   width: min(100%, 900px);
   margin: 0 auto;
@@ -287,16 +299,38 @@ nav a:hover {
   text-align: left;
 }
 
+.memory-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-memory-button,
 .delete-memory-button {
-  border: 1px solid rgba(248, 113, 113, 0.28);
   border-radius: 999px;
-  background: rgba(248, 113, 113, 0.08);
-  color: var(--danger);
   padding: 8px 14px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.edit-memory-button {
+  border: 1px solid rgba(129, 140, 248, 0.32);
+  background: rgba(129, 140, 248, 0.1);
+  color: var(--accent);
+}
+
+.edit-memory-button:hover {
+  background: rgba(129, 140, 248, 0.18);
+  border-color: rgba(129, 140, 248, 0.55);
+  transform: translateY(-1px);
+}
+
+.delete-memory-button {
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  background: rgba(248, 113, 113, 0.08);
+  color: var(--danger);
 }
 
 .delete-memory-button:hover {
@@ -372,5 +406,14 @@ nav a:hover {
   .memory-card-header {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .memory-card-actions {
+    width: 100%;
+  }
+
+  .edit-memory-button,
+  .delete-memory-button {
+    flex: 1;
   }
 }

@@ -1,4 +1,4 @@
-function MemoryCard({ memory, onDeleteMemory }) {
+function MemoryCard({ memory, onDeleteMemory, onEditMemory }) {
   const formattedDate = new Date(memory.created_at).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -13,13 +13,23 @@ function MemoryCard({ memory, onDeleteMemory }) {
           <span>{formattedDate}</span>
         </div>
 
-        <button
-          type="button"
-          className="delete-memory-button"
-          onClick={() => onDeleteMemory(memory.id)}
-        >
-          Delete
-        </button>
+        <div className="memory-card-actions">
+          <button
+            type="button"
+            className="edit-memory-button"
+            onClick={() => onEditMemory(memory)}
+          >
+            Edit
+          </button>
+
+          <button
+            type="button"
+            className="delete-memory-button"
+            onClick={() => onDeleteMemory(memory.id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
 
       <p>{memory.content}</p>
