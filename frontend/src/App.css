@@ -134,6 +134,58 @@ nav a:hover {
   line-height: 1.55;
 }
 
+.ask-memoryos {
+  width: min(100%, 820px);
+  margin: 0 auto 34px;
+  padding: 30px;
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top left, rgba(129, 140, 248, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.74));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+}
+
+.ask-memoryos p {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ask-memoryos h2 {
+  margin: 0 0 22px;
+  color: var(--text);
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+
+.ask-memoryos input {
+  width: 100%;
+  height: 62px;
+  padding: 0 22px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 20px;
+  background: rgba(2, 6, 23, 0.74);
+  color: var(--text);
+  font-size: 17px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.ask-memoryos input::placeholder {
+  color: #64748b;
+}
+
+.ask-memoryos input:focus {
+  border-color: var(--accent);
+  background: rgba(2, 6, 23, 0.88);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
 .memory-controls {
   width: min(100%, 720px);
   margin: 0 auto 28px;
@@ -433,6 +485,16 @@ nav a:hover {
 
   .memories-header p {
     font-size: 18px;
+  }
+
+  .ask-memoryos {
+    padding: 22px;
+    border-radius: 24px;
+    margin-bottom: 28px;
+  }
+
+  .ask-memoryos input {
+    height: 56px;
   }
 
   .memory-controls {

@@ -6,6 +6,7 @@ import {
   fetchMemories,
   updateMemory,
 } from "../api/memoryApi";
+import AskMemoryOS from "../components/AskMemoryOS";
 import CategoryFilter from "../components/CategoryFilter";
 import MemoryForm from "../components/MemoryForm";
 import MemoryList from "../components/MemoryList";
@@ -14,6 +15,7 @@ import SearchBar from "../components/SearchBar";
 function Memories() {
   const [memories, setMemories] = useState([]);
   const [search, setSearch] = useState("");
+  const [question, setQuestion] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [editingMemory, setEditingMemory] = useState(null);
 
@@ -51,20 +53,32 @@ function Memories() {
   }, []);
 
   const filteredMemories = useMemo(() => {
+    const activeSearch = question || search;
+
+    const searchWords = activeSearch
+      .toLowerCase()
+      .replace(/[^\w\s]/g, "")
+      .split(" ")
+      .filter((word) => word.length > 2);
+
     return memories.filter((memory) => {
-      const searchTerm = search.toLowerCase();
+      const searchableText = `
+        ${memory.title}
+        ${memory.content}
+        ${memory.category}
+        ${memory.tags || ""}
+      `.toLowerCase();
 
       const matchesSearch =
-        memory.title.toLowerCase().includes(searchTerm) ||
-        memory.content.toLowerCase().includes(searchTerm) ||
-        (memory.tags || "").toLowerCase().includes(searchTerm);
+        searchWords.length === 0 ||
+        searchWords.some((word) => searchableText.includes(word));
 
       const matchesCategory =
         selectedCategory === "All" || memory.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
-  }, [memories, search, selectedCategory]);
+  }, [memories, search, question, selectedCategory]);
 
   return (
     <main className="page">
@@ -77,6 +91,8 @@ function Memories() {
             retrieve what matters later.
           </p>
         </div>
+
+        <AskMemoryOS question={question} setQuestion={setQuestion} />
 
         <div className="memory-controls">
           <SearchBar search={search} setSearch={setSearch} />
