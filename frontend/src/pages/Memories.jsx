@@ -6,6 +6,7 @@ import {
   fetchMemories,
   updateMemory,
 } from "../api/memoryApi";
+import CategoryFilter from "../components/CategoryFilter";
 import MemoryForm from "../components/MemoryForm";
 import MemoryList from "../components/MemoryList";
 import SearchBar from "../components/SearchBar";
@@ -13,6 +14,7 @@ import SearchBar from "../components/SearchBar";
 function Memories() {
   const [memories, setMemories] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [editingMemory, setEditingMemory] = useState(null);
 
   async function loadMemories() {
@@ -51,13 +53,16 @@ function Memories() {
   const filteredMemories = useMemo(() => {
     return memories.filter((memory) => {
       const searchTerm = search.toLowerCase();
-
-      return (
+      const matchesSearch =
         memory.title.toLowerCase().includes(searchTerm) ||
-        memory.content.toLowerCase().includes(searchTerm)
-      );
+        memory.content.toLowerCase().includes(searchTerm);
+
+      const matchesCategory =
+        selectedCategory === "All" || memory.category === selectedCategory;
+
+      return matchesSearch && matchesCategory;
     });
-  }, [memories, search]);
+  }, [memories, search, selectedCategory]);
 
   return (
     <main className="page">
@@ -71,7 +76,14 @@ function Memories() {
           </p>
         </div>
 
-        <SearchBar search={search} setSearch={setSearch} />
+        <div className="memory-controls">
+          <SearchBar search={search} setSearch={setSearch} />
+
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        </div>
 
         <MemoryForm
           onSaveMemory={handleSaveMemory}
