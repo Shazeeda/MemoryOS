@@ -132,6 +132,31 @@ nav a:hover {
   line-height: 1.55;
 }
 
+.search-bar {
+  width: min(100%, 720px);
+  height: 58px;
+  margin: 0 auto 28px;
+  display: block;
+  padding: 0 20px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.72);
+  color: var(--text);
+  font-size: 17px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-bar::placeholder {
+  color: #64748b;
+}
+
+.search-bar:focus {
+  border-color: var(--accent);
+  background: rgba(2, 6, 23, 0.88);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
 .memory-form {
   width: min(100%, 720px);
   margin: 0 auto 72px;
@@ -189,9 +214,9 @@ nav a:hover {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .memory-form button:hover {
@@ -305,6 +330,11 @@ nav a:hover {
 
   .memories-header p {
     font-size: 18px;
+  }
+
+  .search-bar {
+    height: 54px;
+    margin-bottom: 22px;
   }
 
   .memory-form {
