@@ -9,6 +9,7 @@ function MemoryCard({ memory, onDeleteMemory, onEditMemory }) {
     <article className="memory-card">
       <div className="memory-card-header">
         <div>
+          <div className="memory-category">{memory.category || "General"}</div>
           <h3>{memory.title}</h3>
           <span>{formattedDate}</span>
         </div>

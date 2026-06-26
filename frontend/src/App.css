@@ -37,7 +37,8 @@ a {
 
 button,
 input,
-textarea {
+textarea,
+select {
   font-family: inherit;
 }
 
@@ -173,7 +174,8 @@ nav a:hover {
 }
 
 .memory-form input,
-.memory-form textarea {
+.memory-form textarea,
+.memory-form select {
   width: 100%;
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 20px;
@@ -184,9 +186,15 @@ nav a:hover {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.memory-form input {
+.memory-form input,
+.memory-form select {
   height: 58px;
   padding: 0 20px;
+}
+
+.memory-form select {
+  appearance: none;
+  cursor: pointer;
 }
 
 .memory-form textarea {
@@ -202,7 +210,8 @@ nav a:hover {
 }
 
 .memory-form input:focus,
-.memory-form textarea:focus {
+.memory-form textarea:focus,
+.memory-form select:focus {
   border-color: var(--accent);
   background: rgba(2, 6, 23, 0.88);
   box-shadow: 0 0 0 4px var(--accent-soft);
@@ -275,6 +284,20 @@ nav a:hover {
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 16px;
+}
+
+.memory-category {
+  width: fit-content;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 999px;
+  background: rgba(129, 140, 248, 0.1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .memory-card-header h3 {

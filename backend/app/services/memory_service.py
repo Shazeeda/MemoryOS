@@ -8,6 +8,7 @@ def create_memory(db: Session, memory: Memory):
     new_memory = MemoryModel(
         title=memory.title,
         content=memory.content,
+        category=memory.category,
     )
 
     db.add(new_memory)
@@ -33,6 +34,7 @@ def update_memory(db: Session, memory_id: int, memory: Memory):
 
     existing_memory.title = memory.title
     existing_memory.content = memory.content
+    existing_memory.category = memory.category
 
     db.commit()
     db.refresh(existing_memory)
