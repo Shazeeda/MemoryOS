@@ -11,4 +11,5 @@ class Memory(Base):
     title = Column(String(255), nullable=False)
     content = Column(Text, nullable=False)
     category = Column(String(100), nullable=False, default="General")
+    tags = Column(String(255), nullable=False, default="")
     created_at = Column(DateTime(timezone=True), server_default=func.now())

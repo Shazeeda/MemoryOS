@@ -334,6 +334,23 @@ nav a:hover {
   text-align: left;
 }
 
+.memory-tags {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.memory-tag {
+  padding: 7px 11px;
+  border: 1px solid rgba(203, 213, 225, 0.14);
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--muted-light);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .memory-card-actions {
   display: flex;
   align-items: center;

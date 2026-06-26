@@ -4,12 +4,14 @@ function MemoryForm({ onSaveMemory, editingMemory, onCancelEdit }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("General");
+  const [tags, setTags] = useState("");
 
   useEffect(() => {
     if (editingMemory) {
       setTitle(editingMemory.title);
       setContent(editingMemory.content);
       setCategory(editingMemory.category || "General");
+      setTags(editingMemory.tags || "");
     }
   }, [editingMemory]);
 
@@ -20,17 +22,20 @@ function MemoryForm({ onSaveMemory, editingMemory, onCancelEdit }) {
       title,
       content,
       category,
+      tags,
     });
 
     setTitle("");
     setContent("");
     setCategory("General");
+    setTags("");
   }
 
   function handleCancel() {
     setTitle("");
     setContent("");
     setCategory("General");
+    setTags("");
     onCancelEdit();
   }
 
@@ -55,6 +60,13 @@ function MemoryForm({ onSaveMemory, editingMemory, onCancelEdit }) {
         <option value="Legal">Legal</option>
         <option value="Marketing">Marketing</option>
       </select>
+
+      <input
+        type="text"
+        placeholder="Tags, separated by commas"
+        value={tags}
+        onChange={(event) => setTags(event.target.value)}
+      />
 
       <textarea
         placeholder="Write the knowledge entry..."

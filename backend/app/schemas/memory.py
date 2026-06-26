@@ -5,3 +5,4 @@ class Memory(BaseModel):
     title: str
     content: str
     category: str = "General"
+    tags: str = ""

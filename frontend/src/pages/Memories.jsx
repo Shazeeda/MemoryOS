@@ -53,9 +53,11 @@ function Memories() {
   const filteredMemories = useMemo(() => {
     return memories.filter((memory) => {
       const searchTerm = search.toLowerCase();
+
       const matchesSearch =
         memory.title.toLowerCase().includes(searchTerm) ||
-        memory.content.toLowerCase().includes(searchTerm);
+        memory.content.toLowerCase().includes(searchTerm) ||
+        (memory.tags || "").toLowerCase().includes(searchTerm);
 
       const matchesCategory =
         selectedCategory === "All" || memory.category === selectedCategory;

@@ -5,6 +5,10 @@ function MemoryCard({ memory, onDeleteMemory, onEditMemory }) {
     year: "numeric",
   });
 
+  const tags = memory.tags
+    ? memory.tags.split(",").map((tag) => tag.trim()).filter(Boolean)
+    : [];
+
   return (
     <article className="memory-card">
       <div className="memory-card-header">
@@ -34,6 +38,16 @@ function MemoryCard({ memory, onDeleteMemory, onEditMemory }) {
       </div>
 
       <p>{memory.content}</p>
+
+      {tags.length > 0 && (
+        <div className="memory-tags">
+          {tags.map((tag) => (
+            <span key={tag} className="memory-tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </article>
   );
 }
