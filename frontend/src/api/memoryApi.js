@@ -25,3 +25,15 @@ export async function createMemory(memoryData) {
 
   return response.json();
 }
+
+export async function deleteMemory(memoryId) {
+  const response = await fetch(`${API_BASE_URL}/memories/${memoryId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete memory");
+  }
+
+  return response.json();
+}

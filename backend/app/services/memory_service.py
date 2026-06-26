@@ -19,3 +19,17 @@ def create_memory(db: Session, memory: Memory):
 
 def get_memories(db: Session):
     return db.query(MemoryModel).all()
+
+
+def delete_memory(db: Session, memory_id: int):
+    memory = (
+        db.query(MemoryModel)
+        .filter(MemoryModel.id == memory_id)
+        .first()
+    )
+
+    if memory:
+        db.delete(memory)
+        db.commit()
+
+    return memory

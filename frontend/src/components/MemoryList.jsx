@@ -1,6 +1,6 @@
 import MemoryCard from "./MemoryCard";
 
-function MemoryList({ memories }) {
+function MemoryList({ memories, onDeleteMemory }) {
   return (
     <section className="memory-list">
       <h2>Saved Memories</h2>
@@ -11,7 +11,11 @@ function MemoryList({ memories }) {
         </div>
       ) : (
         memories.map((memory) => (
-          <MemoryCard key={memory.id} memory={memory} />
+          <MemoryCard
+            key={memory.id}
+            memory={memory}
+            onDeleteMemory={onDeleteMemory}
+          />
         ))
       )}
     </section>

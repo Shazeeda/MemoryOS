@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { createMemory, fetchMemories } from "../api/memoryApi";
+import { createMemory, deleteMemory, fetchMemories } from "../api/memoryApi";
 import MemoryForm from "../components/MemoryForm";
 import MemoryList from "../components/MemoryList";
 import SearchBar from "../components/SearchBar";
@@ -16,6 +16,11 @@ function Memories() {
 
   async function handleSaveMemory(memoryData) {
     await createMemory(memoryData);
+    await loadMemories();
+  }
+
+  async function handleDeleteMemory(memoryId) {
+    await deleteMemory(memoryId);
     await loadMemories();
   }
 
@@ -46,14 +51,14 @@ function Memories() {
           </p>
         </div>
 
-        <SearchBar
-          search={search}
-          setSearch={setSearch}
-        />
+        <SearchBar search={search} setSearch={setSearch} />
 
         <MemoryForm onSaveMemory={handleSaveMemory} />
 
-        <MemoryList memories={filteredMemories} />
+        <MemoryList
+          memories={filteredMemories}
+          onDeleteMemory={handleDeleteMemory}
+        />
       </section>
     </main>
   );
